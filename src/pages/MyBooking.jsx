@@ -5,7 +5,7 @@ export default function MyBooking({ rooms, onCancel }) {
 
   if (!r) {
     return (
-      <div className="page">
+      <div>
         <h2>My Booking</h2>
         <p>You have not booked any room</p>
         <Link to="/rooms">Browse Rooms</Link>
@@ -13,33 +13,23 @@ export default function MyBooking({ rooms, onCancel }) {
     );
   }
 
-  const rn = r.roomNo;
-  const b = r.block;
-  const fl = r.floor;
-  const t = r.type;
-  const rp = r.rentPerMonth;
+  const { id, roomNo: rn, block: b, floor: fl, type: t, rentPerMonth: rp, facilities } = r;
 
   return (
-    <div className="page">
+    <div>
       <h2>My Booking</h2>
-      <div className="detail-box">
-        <h3>Room {rn}</h3>
-        <p><strong>Block:</strong> {b}</p>
-        <p><strong>Floor:</strong> {fl}</p>
-        <p><strong>Type:</strong> {t}</p>
-        <p><strong>Rent:</strong> ₹{rp}/month</p>
-        <h4>Facilities:</h4>
-        <ul>
-          {r.facilities.map((fac, i) => (
-            <li key={i}>{fac}</li>
-          ))}
-        </ul>
-
-        <div style={{ marginTop: "15px" }}>
-          <button onClick={() => onCancel(r.id)}>Cancel Booking</button>
-        </div>
-      </div>
+      <h3>Room {rn}</h3>
+      <p>Block: {b}</p>
+      <p>Floor: {fl}</p>
+      <p>Type: {t}</p>
+      <p>Rent: ₹{rp}/month</p>
+      <h4>Facilities:</h4>
+      <ul>
+        {facilities.map((fac, i) => (
+          <li key={i}>{fac}</li>
+        ))}
+      </ul>
+      <button onClick={() => onCancel(id)}>Cancel Booking</button>
     </div>
   );
 }
-

@@ -6,66 +6,48 @@ export default function RoomDetails({ rooms, onBook, onCancel }) {
 
   if (!r) {
     return (
-      <div className="page">
+      <div>
         <p>Room not found.</p>
         <Link to="/rooms">Back to Rooms</Link>
       </div>
     );
   }
 
-  const rn = r.roomNo;
-  const b = r.block;
-  const fl = r.floor;
-  const t = r.type;
-  const c = r.capacity;
-  const o = r.occupied;
-  const rp = r.rentPerMonth;
+  const { id: rid, roomNo: rn, block: b, floor: fl, type: t, capacity: c, occupied: o, rentPerMonth: rp, facilities, isBooked } = r;
   const bl = c - o;
-
   const bk = rooms.some((x) => x.isBooked);
 
   return (
-    <div className="page">
+    <div>
       <h2>Room Details — {rn}</h2>
-      <div className="detail-box">
-        <p><strong>Block:</strong> {b}</p>
-        <p><strong>Floor:</strong> {fl}</p>
-        <p><strong>Type:</strong> {t}</p>
-        <p><strong>Rent:</strong> ₹{rp}/month</p>
-        <p><strong>Capacity:</strong> {c}</p>
-        <p><strong>Occupied:</strong> {o}</p>
-        <p><strong>Beds Left:</strong> {bl}</p>
-        <p>
-          <strong>Status:</strong>{" "}
-          <span className="badge">
-            {o === c ? "Full" : `${bl} beds left`}
-          </span>
-        </p>
-
-        <h4>Facilities:</h4>
-        <ul>
-          {r.facilities.map((fac, i) => (
-            <li key={i}>{fac}</li>
-          ))}
-        </ul>
-
-        <div className="actions" style={{ marginTop: "15px" }}>
-          {r.isBooked ? (
-            <button onClick={() => onCancel(r.id)}>Cancel</button>
-          ) : o === c ? (
-            <span>Room Full</span>
-          ) : bk ? (
-            <span>Already booked another room</span>
-          ) : (
-            <button onClick={() => onBook(r.id)}>Book</button>
-          )}
-        </div>
+      <p>Block: {b}</p>
+      <p>Floor: {fl}</p>
+      <p>Type: {t}</p>
+      <p>Rent: ₹{rp}/month</p>
+      <p>Capacity: {c}</p>
+      <p>Occupied: {o}</p>
+      <p>Beds Left: {bl}</p>
+      <p>Status: {o === c ? "Full" : `${bl} beds left`}</p>
+      <h4>Facilities:</h4>
+      <ul>
+        {facilities.map((fac, i) => (
+          <li key={i}>{fac}</li>
+        ))}
+      </ul>
+      <div>
+        {isBooked ? (
+          <button onClick={() => onCancel(rid)}>Cancel</button>
+        ) : o === c ? (
+          <span>Room Full</span>
+        ) : bk ? (
+          <span>Already booked another room</span>
+        ) : (
+          <button onClick={() => onBook(rid)}>Book</button>
+        )}
       </div>
-
-      <div style={{ marginTop: "20px" }}>
-        <Link to="/rooms">← Back to Rooms</Link>
-      </div>
+      <p>
+        <Link to="/rooms">Back to Rooms</Link>
+      </p>
     </div>
   );
 }
-

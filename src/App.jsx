@@ -31,28 +31,23 @@ export default function App() {
   return (
     <BrowserRouter>
       <Navbar c={c} />
-      <div className="container">
-        <Routes>
-          <Route path="/" element={<Home rooms={rms} />} />
-          <Route
-            path="/rooms"
-            element={
-              <Rooms rooms={rms} onBook={onBook} onCancel={onCancel} />
-            }
-          />
-          <Route
-            path="/rooms/:id"
-            element={
-              <RoomDetails rooms={rms} onBook={onBook} onCancel={onCancel} />
-            }
-          />
-          <Route
-            path="/my-booking"
-            element={<MyBooking rooms={rms} onCancel={onCancel} />}
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home rooms={rms} />} />
+        <Route
+          path="/rooms"
+          element={<Rooms rooms={rms} onBook={onBook} onCancel={onCancel} />}
+        />
+        <Route
+          path="/rooms/:id"
+          element={
+            <RoomDetails rooms={rms} onBook={onBook} onCancel={onCancel} />
+          }
+        />
+        <Route
+          path="/my-booking"
+          element={<MyBooking rooms={rms} onCancel={onCancel} />}
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
-
