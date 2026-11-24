@@ -8,7 +8,9 @@ export default function MyBooking({ rooms, onCancel }) {
       <div>
         <h2>My Booking</h2>
         <p>You have not booked any room</p>
-        <Link to="/rooms">Browse Rooms</Link>
+        <div style={{ marginTop: "14px" }}>
+          <Link to="/rooms" className="btn-primary">Browse Rooms</Link>
+        </div>
       </div>
     );
   }
@@ -18,18 +20,20 @@ export default function MyBooking({ rooms, onCancel }) {
   return (
     <div>
       <h2>My Booking</h2>
-      <h3>Room {rn}</h3>
-      <p>Block: {b}</p>
-      <p>Floor: {fl}</p>
-      <p>Type: {t}</p>
-      <p>Rent: ₹{rp}/month</p>
-      <h4>Facilities:</h4>
-      <ul>
-        {facilities.map((fac, i) => (
-          <li key={i}>{fac}</li>
-        ))}
-      </ul>
-      <button onClick={() => onCancel(id)}>Cancel Booking</button>
+      <div className="detail-card">
+        <h3>Room {rn}</h3>
+        <p>Block: {b}</p>
+        <p>Floor: {fl}</p>
+        <p>Type: {t}</p>
+        <p>Rent: ₹{rp}/month</p>
+        <h4>Facilities:</h4>
+        <ul>
+          {facilities.map((fac, i) => (
+            <li key={i}>{fac}</li>
+          ))}
+        </ul>
+        <button className="btn-cancel" onClick={() => onCancel(id)}>Cancel Booking</button>
+      </div>
     </div>
   );
 }

@@ -16,20 +16,20 @@ export default function Rooms({ rooms, onBook, onCancel }) {
   return (
     <div>
       <h2>All Rooms</h2>
-      <div>
+      <div className="filters-bar">
         <input
           type="text"
           placeholder="Search room no..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
-        />{" "}
+        />
         <select value={t} onChange={(e) => setT(e.target.value)}>
-          <option value="All">All</option>
+          <option value="All">All Types</option>
           <option value="AC">AC</option>
           <option value="Non-AC">Non-AC</option>
         </select>
       </div>
-      <div>
+      <div className="grid">
         {list.map((r) => (
           <RoomCard
             key={r.id}

@@ -8,7 +8,7 @@ export default function RoomDetails({ rooms, onBook, onCancel }) {
     return (
       <div>
         <p>Room not found.</p>
-        <Link to="/rooms">Back to Rooms</Link>
+        <Link to="/rooms" className="link-muted">Back to Rooms</Link>
       </div>
     );
   }
@@ -20,34 +20,39 @@ export default function RoomDetails({ rooms, onBook, onCancel }) {
   return (
     <div>
       <h2>Room Details — {rn}</h2>
-      <p>Block: {b}</p>
-      <p>Floor: {fl}</p>
-      <p>Type: {t}</p>
-      <p>Rent: ₹{rp}/month</p>
-      <p>Capacity: {c}</p>
-      <p>Occupied: {o}</p>
-      <p>Beds Left: {bl}</p>
-      <p>Status: {o === c ? "Full" : `${bl} beds left`}</p>
-      <h4>Facilities:</h4>
-      <ul>
-        {facilities.map((fac, i) => (
-          <li key={i}>{fac}</li>
-        ))}
-      </ul>
-      <div>
-        {isBooked ? (
-          <button onClick={() => onCancel(rid)}>Cancel</button>
-        ) : o === c ? (
-          <span>Room Full</span>
-        ) : bk ? (
-          <span>Already booked another room</span>
-        ) : (
-          <button onClick={() => onBook(rid)}>Book</button>
-        )}
+      <div className="detail-card">
+        <p>Block: {b}</p>
+        <p>Floor: {fl}</p>
+        <p>Type: {t}</p>
+        <p>Rent: ₹{rp}/month</p>
+        <p>Capacity: {c}</p>
+        <p>Occupied: {o}</p>
+        <p>Beds Left: {bl}</p>
+        <p>
+          Status:{" "}
+          <span className={o === c ? "badge badge-full" : "badge"}>
+            {o === c ? "Full" : `${bl} beds left`}
+          </span>
+        </p>
+        <h4>Facilities:</h4>
+        <ul>
+          {facilities.map((fac, i) => (
+            <li key={i}>{fac}</li>
+          ))}
+        </ul>
+        <div style={{ marginTop: "16px" }}>
+          {isBooked ? (
+            <button className="btn-cancel" onClick={() => onCancel(rid)}>Cancel</button>
+          ) : o === c ? (
+            <span className="status-text">Room Full</span>
+          ) : bk ? (
+            <span className="status-text">Already booked another room</span>
+          ) : (
+            <button onClick={() => onBook(rid)}>Book</button>
+          )}
+        </div>
       </div>
-      <p>
-        <Link to="/rooms">Back to Rooms</Link>
-      </p>
+      <Link to="/rooms" className="link-muted">← Back to Rooms</Link>
     </div>
   );
 }

@@ -8,10 +8,22 @@ export default function Home({ rooms }) {
   return (
     <div>
       <h1>Hostel Room Manager</h1>
-      <p>Total Rooms: {tot}</p>
-      <p>Rooms with Beds Left: {avl}</p>
-      <p>Booked Room: {bk ? bk.roomNo : "No booking yet"}</p>
-      <Link to="/rooms">Browse Rooms</Link>
+      <p>Overview of current hostel occupancy and reservations.</p>
+      <div className="stats-grid">
+        <div className="stat-card">
+          <span>Total Rooms</span>
+          <strong>{tot}</strong>
+        </div>
+        <div className="stat-card">
+          <span>Rooms with Beds Left</span>
+          <strong>{avl}</strong>
+        </div>
+        <div className="stat-card">
+          <span>Booked Room</span>
+          <strong>{bk ? bk.roomNo : "No booking yet"}</strong>
+        </div>
+      </div>
+      <Link to="/rooms" className="btn-primary">Browse Rooms</Link>
     </div>
   );
 }

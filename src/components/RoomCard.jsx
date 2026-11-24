@@ -5,23 +5,28 @@ export default function RoomCard({ r, bk, onBook, onCancel }) {
   const bl = c - o;
 
   return (
-    <div style={{ border: "1px solid #ccc", padding: "10px", margin: "10px 0" }}>
+    <div className="card">
       <h3>Room {rn}</h3>
       <p>Block: {b}</p>
       <p>Type: {t}</p>
       <p>Rent: ₹{rp}/month</p>
-      <p>Status: {o === c ? "Full" : `${bl} beds left`}</p>
-      <div>
+      <p>
+        Status:{" "}
+        <span className={o === c ? "badge badge-full" : "badge"}>
+          {o === c ? "Full" : `${bl} beds left`}
+        </span>
+      </p>
+      <div className="card-actions">
         {isBooked ? (
-          <button onClick={() => onCancel(id)}>Cancel</button>
+          <button className="btn-cancel" onClick={() => onCancel(id)}>Cancel</button>
         ) : o === c ? (
-          <span>Room Full</span>
+          <span className="status-text">Room Full</span>
         ) : bk ? (
-          <span>Already booked another room</span>
+          <span className="status-text">Already booked another room</span>
         ) : (
           <button onClick={() => onBook(id)}>Book</button>
-        )}{" "}
-        <Link to={`/rooms/${id}`}>View Details</Link>
+        )}
+        <Link to={`/rooms/${id}`} className="link-muted">View Details</Link>
       </div>
     </div>
   );
